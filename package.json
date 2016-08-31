@@ -1,0 +1,25 @@
+{
+  "name": "nytreactversion",
+  "version": "1.0.0",
+  "description": "A full stack single page applicataion (MERN)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jameshornung/nytReactVersion.git"
+  },
+  "author": "James Hornung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jameshornung/nytReactVersion/issues"
+  },
+  "homepage": "https://github.com/jameshornung/nytReactVersion#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.10"
+  }
+}

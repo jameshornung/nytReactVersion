@@ -1,6 +1,8 @@
 var React = require('react');
 
 var helpers = require('./utils/helpers.js');
+var Results = require('./Children/Results');
+var Saved = require('./Children/Saved');
 
 
 var Main = React.createClass({
@@ -66,6 +68,13 @@ var Main = React.createClass({
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div className="row">
+						<Results />
+					</div>
+					<div className="row">
+						<Saved />
 					</div>
 
 

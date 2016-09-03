@@ -19759,6 +19759,8 @@
 	var React = __webpack_require__(1);
 
 	var helpers = __webpack_require__(160);
+	var Results = __webpack_require__(161);
+	var Saved = __webpack_require__(162);
 
 	var Main = React.createClass({
 		displayName: 'Main',
@@ -19887,6 +19889,16 @@
 							)
 						)
 					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(Results, null)
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(Saved, null)
 				)
 			);
 		}
@@ -19899,6 +19911,87 @@
 /***/ function(module, exports) {
 
 	"use strict";
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Results = React.createClass({
+		displayName: "Results",
+
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "col-sm-12" },
+				React.createElement(
+					"div",
+					{ className: "panel panel-primary" },
+					React.createElement(
+						"div",
+						{ className: "panel-heading" },
+						React.createElement(
+							"h3",
+							{ className: "panel-title" },
+							React.createElement(
+								"strong",
+								null,
+								React.createElement("i", { className: "fa fa-table" }),
+								"   Top Articles"
+							)
+						)
+					),
+					React.createElement("div", { className: "panel-body", id: "wellSection" })
+				)
+			);
+		}
+	});
+
+	module.exports = Results;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Saved = React.createClass({
+		displayName: "Saved",
+
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "col-sm-12" },
+				React.createElement(
+					"div",
+					{ className: "panel panel-primary" },
+					React.createElement(
+						"div",
+						{ className: "panel-heading" },
+						React.createElement(
+							"h3",
+							{ className: "panel-title" },
+							React.createElement(
+								"strong",
+								null,
+								React.createElement("i", { className: "fa fa-table" }),
+								"   Saved Articles"
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Saved;
 
 /***/ }
 /******/ ]);

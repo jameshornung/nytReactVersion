@@ -19758,7 +19758,8 @@
 
 	var React = __webpack_require__(1);
 
-	var helpers = __webpack_require__(160);
+	// var helpers = require('./utils/helpers.js');
+	var Search = __webpack_require__(160);
 	var Results = __webpack_require__(161);
 	var Saved = __webpack_require__(162);
 
@@ -19788,107 +19789,7 @@
 				React.createElement(
 					'div',
 					{ className: 'row' },
-					React.createElement(
-						'div',
-						{ className: 'col-sm-12' },
-						React.createElement('br', null),
-						React.createElement(
-							'div',
-							{ className: 'panel panel-primary' },
-							React.createElement(
-								'div',
-								{ className: 'panel-heading' },
-								React.createElement(
-									'h3',
-									{ className: 'panel-title' },
-									React.createElement(
-										'strong',
-										null,
-										React.createElement('i', { className: 'fa  fa-list-alt' }),
-										'   Search Parameters'
-									)
-								)
-							),
-							React.createElement(
-								'div',
-								{ className: 'panel-body' },
-								React.createElement(
-									'form',
-									{ role: 'form' },
-									React.createElement(
-										'div',
-										{ className: 'form-group' },
-										React.createElement(
-											'label',
-											{ 'for': 'search' },
-											'Search Term:'
-										),
-										React.createElement('input', { type: 'text', className: 'form-control', id: 'searchTerm' })
-									),
-									React.createElement(
-										'div',
-										{ className: 'form-group' },
-										React.createElement(
-											'label',
-											{ 'for': 'pwd' },
-											'Number of Records to Retrieve:'
-										),
-										React.createElement(
-											'select',
-											{ className: 'form-control', id: 'numRecordsSelect' },
-											React.createElement(
-												'option',
-												{ value: '1' },
-												'1'
-											),
-											React.createElement(
-												'option',
-												{ value: '5', selected: true },
-												'5'
-											),
-											React.createElement(
-												'option',
-												{ value: '10' },
-												'10'
-											)
-										)
-									),
-									React.createElement(
-										'div',
-										{ className: 'form-group' },
-										React.createElement(
-											'label',
-											{ 'for': 'startYear' },
-											'Start Year (Optional):'
-										),
-										React.createElement('input', { type: 'text', className: 'form-control', id: 'startYear' })
-									),
-									React.createElement(
-										'div',
-										{ className: 'form-group' },
-										React.createElement(
-											'label',
-											{ 'for': 'endYear' },
-											'End Year (Optional):'
-										),
-										React.createElement('input', { type: 'text', className: 'form-control', id: 'endYear' })
-									),
-									React.createElement(
-										'button',
-										{ type: 'submit', className: 'btn btn-default', id: 'runSearch' },
-										React.createElement('i', { className: 'fa fa-search' }),
-										' Search'
-									),
-									React.createElement(
-										'button',
-										{ type: 'button', className: 'btn btn-default', id: 'clearAll' },
-										React.createElement('i', { className: 'fa fa-trash' }),
-										' Clear Results'
-									)
-								)
-							)
-						)
-					)
+					React.createElement(Search, null)
 				),
 				React.createElement(
 					'div',
@@ -19908,9 +19809,153 @@
 
 /***/ },
 /* 160 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Search = React.createClass({
+		displayName: "Search",
+
+
+		getInitialState: function getInitialState() {
+			return {
+				queryTerm: "",
+				numResults: 0,
+				startYear: 0,
+				endYear: 0,
+				queryURL: "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q="
+			};
+		},
+
+		handleClick: function handleClick() {
+			this.helpers.runSearch;
+		},
+
+		handleSearchChange: function handleSearchChange(event) {
+			this.setState({ queryTerm: event.target.value });
+			console.log(this.state.queryURL);
+		},
+
+		handleNumChange: function handleNumChange(event) {
+			this.setState({ numResults: event.target.value });
+		},
+
+		handleStartChange: function handleStartChange(event) {
+			this.setState({ startYear: event.target.value });
+		},
+
+		handleEndChange: function handleEndChange(event) {
+			this.setState({ endYear: event.target.value });
+		},
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "col-sm-12" },
+				React.createElement("br", null),
+				React.createElement(
+					"div",
+					{ className: "panel panel-primary" },
+					React.createElement(
+						"div",
+						{ className: "panel-heading" },
+						React.createElement(
+							"h3",
+							{ className: "panel-title" },
+							React.createElement(
+								"strong",
+								null,
+								React.createElement("i", { className: "fa  fa-list-alt" }),
+								"   Search Parameters"
+							)
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "panel-body" },
+						React.createElement(
+							"form",
+							{ role: "form" },
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "search" },
+									"Search Term:"
+								),
+								React.createElement("input", { type: "text", className: "form-control", id: "searchTerm", onChange: this.handleSearchChange })
+							),
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "pwd" },
+									"Number of Records to Retrieve:"
+								),
+								React.createElement(
+									"select",
+									{ className: "form-control", id: "numRecordsSelect", onChange: this.handleNumChange },
+									React.createElement(
+										"option",
+										{ value: "1" },
+										"1"
+									),
+									React.createElement(
+										"option",
+										{ value: "5" },
+										"5"
+									),
+									React.createElement(
+										"option",
+										{ value: "10" },
+										"10"
+									)
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "startYear" },
+									"Start Year (Optional):"
+								),
+								React.createElement("input", { type: "text", className: "form-control", id: "startYear", onChange: this.handleStartChange })
+							),
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "endYear" },
+									"End Year (Optional):"
+								),
+								React.createElement("input", { type: "text", className: "form-control", id: "endYear", onChange: this.handleEndChange })
+							),
+							React.createElement(
+								"button",
+								{ type: "submit", className: "btn btn-default", id: "runSearch", onClick: this.handleClick },
+								React.createElement("i", { className: "fa fa-search" }),
+								" Search"
+							),
+							React.createElement(
+								"button",
+								{ type: "button", className: "btn btn-default", id: "clearAll" },
+								React.createElement("i", { className: "fa fa-trash" }),
+								" Clear Results"
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Search;
 
 /***/ },
 /* 161 */

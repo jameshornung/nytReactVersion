@@ -1,5 +1,6 @@
 var React = require('react');
 var axios = require('axios');
+var $ = require('jquery');
 // var request = require('request');
 
 var Search = require('./Children/Search');
@@ -35,7 +36,7 @@ var Main = React.createClass({
 		//verify update was recognized by parent (submit button etered)
 		console.log('Update Verified');
 
-		//VERIFY CHILD UPDATED STATES
+		//VERIFY CHILD UPDATED STATES (this works)
 		//--------------------------------------------
 
 		// // console.log(this.state.queryTerm);
@@ -46,18 +47,41 @@ var Main = React.createClass({
 		//QUERY THE NEW YORK TIMES API (Cannot make this work using a variety of methods???)
 		//---------------------------------------------
 
-		//Using axios from the helpers component
+		//Attempting axios from the helpers component
 		// helpers.runSearch(this.state.queryTerm);
 
-		//Using axios in this component
+		//----------------------------------------------
+
+		//Attempting axios in this component
 		// var URL ="https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=" + this.state.queryTerm;
 
 		// axios.get(URL).then(function(response){
 		// 	console.log(response);
 		// })
 
+		//------------------------------------------------
+
+		//Attempting ajax call
+		// var settings = {
+		// 	  "async": true,
+		// 	  "crossDomain": true,
+		// 	  "url": "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=donald%20trump",
+		// 	  "method": "GET",
+		// 	  "headers": {
+		// 	    "cache-control": "no-cache",
+		// 	    "postman-token": "7e98c5a0-facc-6c4b-962d-5b2ff11bc593"
+		// 	  }
+		// 	}
+
+		// 	console.log(settings);
+		// 	$.ajax(settings).done(function (response) {
+		// 		console.log('ajax request complete');
+		// 	  	console.log(response);
+		// 	});
+
+		//----------------------------------------------------
+
 		//Have also attempted:
-		//jQuery ajax call (error: ? is not recognized)
 		//request npm package (crashes webpack?)
 		//native node (no response)
 		//All methods work in postman, just unable to translate to this program

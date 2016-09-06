@@ -14,7 +14,7 @@ var Search = React.createClass({
 	//These functions update the search parameters as the input fields are updated
 	handleSearchChange: function(event){
     	this.setState({queryTerm: event.target.value});
-    	//verifies the update is happening
+    	//verifies the update is happening (works)
     	// console.log(this.state.queryTerm);
 	},
 
@@ -36,7 +36,7 @@ var Search = React.createClass({
 		// console.log(this.state.startYear);
 		// console.log(this.state.endYear);
 
-		// Updates the parent element
+		// Updates the parent element (works)
 		this.props.setParameters(this.state.queryTerm, this.state.numResults, this.state.startYear, this.state.endYear);
 	},
 

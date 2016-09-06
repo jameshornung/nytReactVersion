@@ -1,7 +1,7 @@
 var React = require('react');
 var axios = require('axios');
+// var request = require('request');
 
-// var helpers = require('./utils/helpers.js');
 var Search = require('./Children/Search');
 var Results = require('./Children/Results');
 var Saved = require('./Children/Saved');
@@ -20,7 +20,7 @@ var Main = React.createClass({
 		}
 	},
 
-	// This functions should allow the child element to update search parameters here in the parent element
+	// This functions allows the child element to update search parameters here in the parent element
 	setParameters: function(term, number, year1, year2){
 		this.setState({
 			queryTerm: term,
@@ -31,22 +31,36 @@ var Main = React.createClass({
 	},
 
 	componentDidUpdate: function(){
-		console.log('update happened');
+
+		//verify update was recognized by parent (submit button etered)
+		console.log('Update Verified');
+
+		//VERIFY CHILD UPDATED STATES
+		//--------------------------------------------
+
 		// // console.log(this.state.queryTerm);
 		// // console.log(this.state.numResults);
 		// // console.log(this.state.startYear);
 		// // console.log(this.state.endYear);
 
-		
-		var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=";
-		var queryURL = queryURLBase + this.state.queryTerm;
+		//QUERY THE NEW YORK TIMES API (Cannot make this work using a variety of methods???)
+		//---------------------------------------------
 
-		axios.request(queryURL)
-			.then(function(response){
+		//Using axios from the helpers component
+		// helpers.runSearch(this.state.queryTerm);
 
-			console.log(response);
-				
-		})
+		//Using axios in this component
+		// var URL ="https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=" + this.state.queryTerm;
+
+		// axios.get(URL).then(function(response){
+		// 	console.log(response);
+		// })
+
+		//Have also attempted:
+		//jQuery ajax call (error: ? is not recognized)
+		//request npm package (crashes webpack?)
+		//native node (no response)
+		//All methods work in postman, just unable to translate to this program
 	},
 
 	//render the function

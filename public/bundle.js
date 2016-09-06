@@ -19757,14 +19757,14 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var axios = __webpack_require__(164);
+	var axios = __webpack_require__(160);
+	// var request = require('request');
 
-	// var helpers = require('./utils/helpers.js');
-	var Search = __webpack_require__(160);
-	var Results = __webpack_require__(161);
-	var Saved = __webpack_require__(162);
+	var Search = __webpack_require__(386);
+	var Results = __webpack_require__(387);
+	var Saved = __webpack_require__(388);
 
-	var helpers = __webpack_require__(163);
+	var helpers = __webpack_require__(389);
 
 	var Main = React.createClass({
 		displayName: 'Main',
@@ -19779,7 +19779,7 @@
 			};
 		},
 
-		// This functions should allow the child element to update search parameters here in the parent element
+		// This functions allows the child element to update search parameters here in the parent element
 		setParameters: function setParameters(term, number, year1, year2) {
 			this.setState({
 				queryTerm: term,
@@ -19790,20 +19790,36 @@
 		},
 
 		componentDidUpdate: function componentDidUpdate() {
-			console.log('update happened');
+
+			//verify update was recognized by parent (submit button etered)
+			console.log('Update Verified');
+
+			//VERIFY CHILD UPDATED STATES
+			//--------------------------------------------
+
 			// // console.log(this.state.queryTerm);
 			// // console.log(this.state.numResults);
 			// // console.log(this.state.startYear);
 			// // console.log(this.state.endYear);
 
+			//QUERY THE NEW YORK TIMES API (Cannot make this work using a variety of methods???)
+			//---------------------------------------------
 
-			var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=";
-			var queryURL = queryURLBase + this.state.queryTerm;
+			//Using axios from the helpers component
+			// helpers.runSearch(this.state.queryTerm);
 
-			axios.request(queryURL).then(function (response) {
+			//Using axios in this component
+			// var URL ="https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=" + this.state.queryTerm;
 
-				console.log(response);
-			});
+			// axios.get(URL).then(function(response){
+			// 	console.log(response);
+			// })
+
+			//Have also attempted:
+			//jQuery ajax call (error: ? is not recognized)
+			//request npm package (crashes webpack?)
+			//native node (no response)
+			//All methods work in postman, just unable to translate to this program
 		},
 
 		//render the function
@@ -19850,386 +19866,22 @@
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	var Search = React.createClass({
-		displayName: "Search",
-
-
-		getInitialState: function getInitialState() {
-			return {
-				queryTerm: "",
-				numResults: 0,
-				startYear: 0,
-				endYear: 0
-			};
-		},
-
-		handleSearchChange: function handleSearchChange(event) {
-			this.setState({ queryTerm: event.target.value });
-			// console.log(this.state.queryTerm);
-		},
-
-		handleNumChange: function handleNumChange(event) {
-			this.setState({ numResults: event.target.value });
-		},
-
-		handleStartChange: function handleStartChange(event) {
-			this.setState({ startYear: event.target.value });
-		},
-
-		handleEndChange: function handleEndChange(event) {
-			this.setState({ endYear: event.target.value });
-		},
-
-		handleClick: function handleClick() {
-			// console.log(this.state.queryTerm);
-			// console.log(this.state.numResults);
-			// console.log(this.state.startYear);
-			// console.log(this.state.endYear);
-			// Set the parent to have the search term
-			this.props.setParameters(this.state.queryTerm, this.state.numResults, this.state.startYear, this.state.endYear);
-		},
-
-		render: function render() {
-			return React.createElement(
-				"div",
-				{ className: "col-sm-12" },
-				React.createElement("br", null),
-				React.createElement(
-					"div",
-					{ className: "panel panel-primary" },
-					React.createElement(
-						"div",
-						{ className: "panel-heading" },
-						React.createElement(
-							"h3",
-							{ className: "panel-title" },
-							React.createElement(
-								"strong",
-								null,
-								React.createElement("i", { className: "fa  fa-list-alt" }),
-								"   Search Parameters"
-							)
-						)
-					),
-					React.createElement(
-						"div",
-						{ className: "panel-body" },
-						React.createElement(
-							"form",
-							{ role: "form" },
-							React.createElement(
-								"div",
-								{ className: "form-group" },
-								React.createElement(
-									"label",
-									{ htmlFor: "search" },
-									"Search Term:"
-								),
-								React.createElement("input", { type: "text", className: "form-control", id: "searchTerm", onChange: this.handleSearchChange })
-							),
-							React.createElement(
-								"div",
-								{ className: "form-group" },
-								React.createElement(
-									"label",
-									{ htmlFor: "pwd" },
-									"Number of Records to Retrieve:"
-								),
-								React.createElement(
-									"select",
-									{ className: "form-control", id: "numRecordsSelect", onChange: this.handleNumChange },
-									React.createElement(
-										"option",
-										{ value: "1" },
-										"1"
-									),
-									React.createElement(
-										"option",
-										{ value: "5" },
-										"5"
-									),
-									React.createElement(
-										"option",
-										{ value: "10" },
-										"10"
-									)
-								)
-							),
-							React.createElement(
-								"div",
-								{ className: "form-group" },
-								React.createElement(
-									"label",
-									{ htmlFor: "startYear" },
-									"Start Year (Optional):"
-								),
-								React.createElement("input", { type: "text", className: "form-control", id: "startYear", onChange: this.handleStartChange })
-							),
-							React.createElement(
-								"div",
-								{ className: "form-group" },
-								React.createElement(
-									"label",
-									{ htmlFor: "endYear" },
-									"End Year (Optional):"
-								),
-								React.createElement("input", { type: "text", className: "form-control", id: "endYear", onChange: this.handleEndChange })
-							),
-							React.createElement(
-								"button",
-								{ type: "submit", className: "btn btn-default", id: "runSearch", onClick: this.handleClick },
-								React.createElement("i", { className: "fa fa-search" }),
-								" Search"
-							),
-							React.createElement(
-								"button",
-								{ type: "button", className: "btn btn-default", id: "clearAll" },
-								React.createElement("i", { className: "fa fa-trash" }),
-								" Clear Results"
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	module.exports = Search;
+	module.exports = __webpack_require__(161);
 
 /***/ },
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	var Results = React.createClass({
-		displayName: "Results",
-
-
-		render: function render() {
-			return React.createElement(
-				"div",
-				{ className: "col-sm-12" },
-				React.createElement(
-					"div",
-					{ className: "panel panel-primary" },
-					React.createElement(
-						"div",
-						{ className: "panel-heading" },
-						React.createElement(
-							"h3",
-							{ className: "panel-title" },
-							React.createElement(
-								"strong",
-								null,
-								React.createElement("i", { className: "fa fa-table" }),
-								"   Top Articles"
-							)
-						)
-					),
-					React.createElement("div", { className: "panel-body", id: "wellSection" })
-				)
-			);
-		}
-	});
-
-	module.exports = Results;
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	var Saved = React.createClass({
-		displayName: "Saved",
-
-
-		render: function render() {
-			return React.createElement(
-				"div",
-				{ className: "col-sm-12" },
-				React.createElement(
-					"div",
-					{ className: "panel panel-primary" },
-					React.createElement(
-						"div",
-						{ className: "panel-heading" },
-						React.createElement(
-							"h3",
-							{ className: "panel-title" },
-							React.createElement(
-								"strong",
-								null,
-								React.createElement("i", { className: "fa fa-table" }),
-								"   Saved Articles"
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	module.exports = Saved;
-
-/***/ },
-/* 163 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	// SETUP VARIABLES
-	// ==========================================================
-
-	// This variable will be pre-programmed with our authentication key (the one we received when we registered)
-	var authKey = "7d3df12c9cc24361aad9ac44f690a69b";
-
-	// Based on the queryTerm we will create a queryURL 
-	var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=";
-
-	// Array to hold the various article info
-	var articleCounter = 0;
-
-	// FUNCTIONS
-	// ==========================================================
-
-	var helpers = {
-
-		runQuery: function runQuery(searchTerm) {
-
-			var queryURL = queryURLBase + searchTerm;
-
-			return $.ajax({ url: queryURL, method: "GET" }).done(function (NYTData) {
-				console.log("------------------------------------");
-				console.log("URL: " + queryURL);
-				console.log("------------------------------------");
-
-				// Here we then log the NYTData to console, where it will show up as an object.
-				console.log(NYTData);
-				console.log("------------------------------------");
-			});
-		},
-
-		runSearch: function runSearch() {
-			return;
-
-			var searchTerm = $('#searchTerm').val().trim();
-			queryURL = queryURLBase + searchTerm;
-
-			// Num Results
-			numResults = $("#numRecordsSelect").val();
-
-			// Start Year
-			startYear = $('#startYear').val().trim();
-
-			// End Year
-			endYear = $('#endYear').val().trim();
-
-			// If the user provides a startYear -- the startYear will be included in the queryURL
-			if (parseInt(startYear)) {
-				queryURL = queryURL + "&begin_date=" + startYear + "0101";
-			}
-
-			// If the user provides a startYear -- the endYear will be included in the queryURL
-			if (parseInt(endYear)) {
-				queryURL = queryURL + "&end_date=" + endYear + "0101";
-			}
-
-			// Then we will pass the final queryURL and the number of results to include to the runQuery function
-			runQuery(numResults, queryURL);
-
-			// This line allows us to take advantage of the HTML "submit" property. This way we can hit enter on the keyboard and it registers the search (in addition to clicks).
-			return false;
-		}
-	};
-
-	module.exports = helpers;
-
-	function runQuery(numArticles, queryURL) {
-
-		// The AJAX function uses the URL and Gets the JSON data associated with it. The data then gets stored in the variable called: "NYTData"
-		$.ajax({ url: queryURL, method: "GET" }).done(function (NYTData) {
-
-			// Here we are logging the URL so we have access to it for troubleshooting
-			console.log("------------------------------------");
-			console.log("URL: " + queryURL);
-			console.log("------------------------------------");
-
-			// Here we then log the NYTData to console, where it will show up as an object.
-			console.log(NYTData);
-			console.log("------------------------------------");
-
-			// Loop through and provide the correct number of articles
-			for (var i = 0; i < numArticles; i++) {
-
-				// Add to the Article Counter (to make sure we show the right number)
-				articleCounter++;
-
-				// Create the HTML Well (Section) and Add the Article content for each
-				var wellSection = $("<div>");
-				wellSection.addClass('well');
-				wellSection.attr('id', 'articleWell-' + articleCounter);
-				$('#wellSection').append(wellSection);
-
-				// Confirm that the specific JSON for the article isn't missing any details
-				// If the article has a headline include the headline in the HTML
-				if (NYTData.response.docs[i].headline != "null") {
-					$("#articleWell-" + articleCounter).append('<h3 class="articleHeadline"><span class="label label-primary">' + articleCounter + '</span><strong>   ' + NYTData.response.docs[i].headline.main + "</strong></h3>");
-
-					// Log the first article's Headline to console.
-					console.log(NYTData.response.docs[i].headline.main);
-				}
-
-				// If the article has a Byline include the headline in the HTML
-				if (NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.hasOwnProperty("original")) {
-					$("#articleWell-" + articleCounter).append('<h5>' + NYTData.response.docs[i].byline.original + "</h5>");
-
-					// Log the first article's Author to console.
-					console.log(NYTData.response.docs[i].byline.original);
-				}
-
-				// Then display the remaining fields in the HTML (Section Name, Date, URL)
-				$("#articleWell-" + articleCounter).append('<h5>Section: ' + NYTData.response.docs[i].section_name + "</h5>");
-				$("#articleWell-" + articleCounter).append('<h5>' + NYTData.response.docs[i].pub_date + "</h5>");
-				$("#articleWell-" + articleCounter).append("<a href='" + NYTData.response.docs[i].web_url + "'>" + NYTData.response.docs[i].web_url + "</a>");
-
-				// Log the remaining fields to console as well
-				console.log(NYTData.response.docs[i].pub_date);
-				console.log(NYTData.response.docs[i].section_name);
-				console.log(NYTData.response.docs[i].web_url);
-			}
-		});
-	}
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(165);
-
-/***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
-	var defaults = __webpack_require__(166);
-	var utils = __webpack_require__(167);
-	var dispatchRequest = __webpack_require__(169);
-	var InterceptorManager = __webpack_require__(178);
-	var isAbsoluteURL = __webpack_require__(179);
-	var combineURLs = __webpack_require__(180);
-	var bind = __webpack_require__(181);
-	var transformData = __webpack_require__(173);
+	var defaults = __webpack_require__(162);
+	var utils = __webpack_require__(163);
+	var dispatchRequest = __webpack_require__(165);
+	var InterceptorManager = __webpack_require__(174);
+	var isAbsoluteURL = __webpack_require__(175);
+	var combineURLs = __webpack_require__(176);
+	var bind = __webpack_require__(177);
+	var transformData = __webpack_require__(169);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -20318,7 +19970,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(182);
+	axios.spread = __webpack_require__(178);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -20346,13 +19998,13 @@
 
 
 /***/ },
-/* 166 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
-	var normalizeHeaderName = __webpack_require__(168);
+	var utils = __webpack_require__(163);
+	var normalizeHeaderName = __webpack_require__(164);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -20424,7 +20076,7 @@
 
 
 /***/ },
-/* 167 */
+/* 163 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20707,12 +20359,12 @@
 
 
 /***/ },
-/* 168 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -20725,7 +20377,7 @@
 
 
 /***/ },
-/* 169 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20747,10 +20399,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(170);
+	        adapter = __webpack_require__(166);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(170);
+	        adapter = __webpack_require__(166);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -20766,18 +20418,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 170 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(167);
-	var buildURL = __webpack_require__(171);
-	var parseHeaders = __webpack_require__(172);
-	var transformData = __webpack_require__(173);
-	var isURLSameOrigin = __webpack_require__(174);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(175);
-	var settle = __webpack_require__(176);
+	var utils = __webpack_require__(163);
+	var buildURL = __webpack_require__(167);
+	var parseHeaders = __webpack_require__(168);
+	var transformData = __webpack_require__(169);
+	var isURLSameOrigin = __webpack_require__(170);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(171);
+	var settle = __webpack_require__(172);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -20874,7 +20526,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(177);
+	    var cookies = __webpack_require__(173);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -20935,12 +20587,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 171 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -21009,12 +20661,12 @@
 
 
 /***/ },
-/* 172 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	/**
 	 * Parse headers into an object
@@ -21052,12 +20704,12 @@
 
 
 /***/ },
-/* 173 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	/**
 	 * Transform the data for a request or a response
@@ -21078,12 +20730,12 @@
 
 
 /***/ },
-/* 174 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -21152,7 +20804,7 @@
 
 
 /***/ },
-/* 175 */
+/* 171 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21194,7 +20846,7 @@
 
 
 /***/ },
-/* 176 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21218,12 +20870,12 @@
 
 
 /***/ },
-/* 177 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -21277,12 +20929,12 @@
 
 
 /***/ },
-/* 178 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(163);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -21335,7 +20987,7 @@
 
 
 /***/ },
-/* 179 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21355,7 +21007,7 @@
 
 
 /***/ },
-/* 180 */
+/* 176 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21373,7 +21025,7 @@
 
 
 /***/ },
-/* 181 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21390,7 +21042,7 @@
 
 
 /***/ },
-/* 182 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21421,6 +21073,474 @@
 	  };
 	};
 
+
+/***/ },
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Search = React.createClass({
+		displayName: "Search",
+
+
+		getInitialState: function getInitialState() {
+			return {
+				queryTerm: "",
+				numResults: 0,
+				startYear: 0,
+				endYear: 0
+			};
+		},
+
+		//These functions update the search parameters as the input fields are updated
+		handleSearchChange: function handleSearchChange(event) {
+			this.setState({ queryTerm: event.target.value });
+			//verifies the update is happening
+			// console.log(this.state.queryTerm);
+		},
+
+		handleNumChange: function handleNumChange(event) {
+			this.setState({ numResults: event.target.value });
+		},
+
+		handleStartChange: function handleStartChange(event) {
+			this.setState({ startYear: event.target.value });
+		},
+
+		handleEndChange: function handleEndChange(event) {
+			this.setState({ endYear: event.target.value });
+		},
+
+		handleClick: function handleClick() {
+			// console.log(this.state.queryTerm);
+			// console.log(this.state.numResults);
+			// console.log(this.state.startYear);
+			// console.log(this.state.endYear);
+
+			// Updates the parent element
+			this.props.setParameters(this.state.queryTerm, this.state.numResults, this.state.startYear, this.state.endYear);
+		},
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "col-sm-12" },
+				React.createElement("br", null),
+				React.createElement(
+					"div",
+					{ className: "panel panel-primary" },
+					React.createElement(
+						"div",
+						{ className: "panel-heading" },
+						React.createElement(
+							"h3",
+							{ className: "panel-title" },
+							React.createElement(
+								"strong",
+								null,
+								React.createElement("i", { className: "fa  fa-list-alt" }),
+								"   Search Parameters"
+							)
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "panel-body" },
+						React.createElement(
+							"form",
+							{ role: "form" },
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "search" },
+									"Search Term:"
+								),
+								React.createElement("input", { type: "text", className: "form-control", id: "searchTerm", onChange: this.handleSearchChange })
+							),
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "pwd" },
+									"Number of Records to Retrieve:"
+								),
+								React.createElement(
+									"select",
+									{ className: "form-control", id: "numRecordsSelect", onChange: this.handleNumChange },
+									React.createElement(
+										"option",
+										{ value: "1" },
+										"1"
+									),
+									React.createElement(
+										"option",
+										{ value: "5" },
+										"5"
+									),
+									React.createElement(
+										"option",
+										{ value: "10" },
+										"10"
+									)
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "startYear" },
+									"Start Year (Optional):"
+								),
+								React.createElement("input", { type: "text", className: "form-control", id: "startYear", onChange: this.handleStartChange })
+							),
+							React.createElement(
+								"div",
+								{ className: "form-group" },
+								React.createElement(
+									"label",
+									{ htmlFor: "endYear" },
+									"End Year (Optional):"
+								),
+								React.createElement("input", { type: "text", className: "form-control", id: "endYear", onChange: this.handleEndChange })
+							),
+							React.createElement(
+								"button",
+								{ type: "submit", className: "btn btn-default", id: "runSearch", onClick: this.handleClick },
+								React.createElement("i", { className: "fa fa-search" }),
+								" Search"
+							),
+							React.createElement(
+								"button",
+								{ type: "button", className: "btn btn-default", id: "clearAll" },
+								React.createElement("i", { className: "fa fa-trash" }),
+								" Clear Results"
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Search;
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Results = React.createClass({
+		displayName: "Results",
+
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "col-sm-12" },
+				React.createElement(
+					"div",
+					{ className: "panel panel-primary" },
+					React.createElement(
+						"div",
+						{ className: "panel-heading" },
+						React.createElement(
+							"h3",
+							{ className: "panel-title" },
+							React.createElement(
+								"strong",
+								null,
+								React.createElement("i", { className: "fa fa-table" }),
+								"   Top Articles"
+							)
+						)
+					),
+					React.createElement("div", { className: "panel-body", id: "wellSection" })
+				)
+			);
+		}
+	});
+
+	module.exports = Results;
+
+/***/ },
+/* 388 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Saved = React.createClass({
+		displayName: "Saved",
+
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "col-sm-12" },
+				React.createElement(
+					"div",
+					{ className: "panel panel-primary" },
+					React.createElement(
+						"div",
+						{ className: "panel-heading" },
+						React.createElement(
+							"h3",
+							{ className: "panel-title" },
+							React.createElement(
+								"strong",
+								null,
+								React.createElement("i", { className: "fa fa-table" }),
+								"   Saved Articles"
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Saved;
+
+/***/ },
+/* 389 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var axios = __webpack_require__(160);
+
+	var helpers = {
+
+		runSearch: function runSearch(term) {
+			console.log(term);
+
+			var URL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=" + term;
+			return axios.get(URL).then(function (response) {
+				console.log(response);
+				return response;
+			});
+		}
+	};
+
+	module.exports = helpers;
 
 /***/ }
 /******/ ]);

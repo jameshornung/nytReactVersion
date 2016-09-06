@@ -5,7 +5,7 @@
 var authKey = "7d3df12c9cc24361aad9ac44f690a69b";
 
 // Based on the queryTerm we will create a queryURL 
-var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey + "&q=";
+var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=";
 
 // Array to hold the various article info
 var articleCounter = 0;
@@ -15,7 +15,10 @@ var articleCounter = 0;
 
 var helpers = {
 
-	runQuery: function(numArticles, queryURL){
+	runQuery: function(searchTerm){
+		
+		var queryURL = queryURLBase + searchTerm;
+
 		return $.ajax({url: queryURL, method: "GET"}).done(function(NYTData) {
 			console.log("------------------------------------")
 			console.log("URL: " + queryURL);

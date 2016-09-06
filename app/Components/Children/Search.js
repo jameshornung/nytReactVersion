@@ -7,18 +7,13 @@ var Search = React.createClass({
 			queryTerm: "",
 			numResults: 0,
 			startYear: 0,
-			endYear: 0,
-			queryURL: "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q="
+			endYear: 0 
 		}
-	},
-
-	handleClick: function(){
-		this.helpers.runSearch;
 	},
 
 	handleSearchChange: function(event){
     	this.setState({queryTerm: event.target.value});
-    	console.log(this.state.queryURL);
+    	// console.log(this.state.queryTerm);
 	},
 
 	handleNumChange: function(event){
@@ -31,6 +26,15 @@ var Search = React.createClass({
 
 	handleEndChange: function(event){
 		this.setState({endYear: event.target.value});
+	},
+
+	handleClick: function(){
+		// console.log(this.state.queryTerm);
+		// console.log(this.state.numResults);
+		// console.log(this.state.startYear);
+		// console.log(this.state.endYear);
+		// Set the parent to have the search term
+		this.props.setParameters(this.state.queryTerm, this.state.numResults, this.state.startYear, this.state.endYear);
 	},
 
 	render: function(){

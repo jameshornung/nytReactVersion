@@ -30,13 +30,14 @@ var Search = React.createClass({
 		this.setState({endYear: event.target.value});
 	},
 
-	handleClick: function(){
+	handleClick: function(e){
+		e.preventDefault();
 		// console.log(this.state.queryTerm);
 		// console.log(this.state.numResults);
 		// console.log(this.state.startYear);
 		// console.log(this.state.endYear);
 
-		// Updates the parent element (works)
+		// Updates the parent element
 		this.props.setParameters(this.state.queryTerm, this.state.numResults, this.state.startYear, this.state.endYear);
 	},
 
@@ -63,7 +64,8 @@ var Search = React.createClass({
 							 
 							  <div className="form-group">
 							    <label htmlFor="pwd">Number of Records to Retrieve:</label>
-								<select className="form-control" id="numRecordsSelect" onChange={this.handleNumChange}>
+								<select className="form-control" id="numRecordsSelect" require="true" onChange={this.handleNumChange}>
+									<option value="0">-</option>
 									<option value="1">1</option>
 									<option value="5">5</option>
 									<option value="10">10</option>

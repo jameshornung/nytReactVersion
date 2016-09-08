@@ -19759,13 +19759,12 @@
 	var React = __webpack_require__(1);
 	var axios = __webpack_require__(160);
 	var $ = __webpack_require__(179);
-	// var request = require('request');
 
-	var Search = __webpack_require__(180);
-	var Results = __webpack_require__(181);
-	var Saved = __webpack_require__(182);
+	var Search = __webpack_require__(387);
+	var Results = __webpack_require__(388);
+	var Saved = __webpack_require__(389);
 
-	var helpers = __webpack_require__(183);
+	var helpers = __webpack_require__(390);
 
 	var Main = React.createClass({
 		displayName: 'Main',
@@ -19793,57 +19792,20 @@
 		componentDidUpdate: function componentDidUpdate() {
 
 			//verify update was recognized by parent (submit button etered)
-			console.log('Update Verified');
+			// console.log('Update Verified');
 
-			//VERIFY CHILD UPDATED STATES (this works)
+			//VERIFY CHILD UPDATED STATES 
 			//--------------------------------------------
 
-			// // console.log(this.state.queryTerm);
-			// // console.log(this.state.numResults);
-			// // console.log(this.state.startYear);
-			// // console.log(this.state.endYear);
+			// console.log(this.state.queryTerm);
+			// console.log(this.state.numResults);
+			// console.log(this.state.startYear);
+			// console.log(this.state.endYear);
 
-			//QUERY THE NEW YORK TIMES API (Cannot make this work using a variety of methods???)
+			//QUERY THE NEW YORK TIMES API 
 			//---------------------------------------------
 
-			//Attempting axios from the helpers component
-			// helpers.runSearch(this.state.queryTerm);
-
-			//----------------------------------------------
-
-			//Attempting axios in this component
-			// var URL ="https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=" + this.state.queryTerm;
-
-			// axios.get(URL).then(function(response){
-			// 	console.log(response);
-			// })
-
-			//------------------------------------------------
-
-			//Attempting ajax call
-			// var settings = {
-			// 	  "async": true,
-			// 	  "crossDomain": true,
-			// 	  "url": "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=donald%20trump",
-			// 	  "method": "GET",
-			// 	  "headers": {
-			// 	    "cache-control": "no-cache",
-			// 	    "postman-token": "7e98c5a0-facc-6c4b-962d-5b2ff11bc593"
-			// 	  }
-			// 	}
-
-			// 	console.log(settings);
-			// 	$.ajax(settings).done(function (response) {
-			// 		console.log('ajax request complete');
-			// 	  	console.log(response);
-			// 	});
-
-			//----------------------------------------------------
-
-			//Have also attempted:
-			//request npm package (crashes webpack?)
-			//native node (no response)
-			//All methods work in postman, just unable to translate to this program
+			helpers.runSearch(this.state.queryTerm, this.state.numResults);
 		},
 
 		//render the function
@@ -31179,7 +31141,214 @@
 
 
 /***/ },
-/* 180 */
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31218,13 +31387,14 @@
 			this.setState({ endYear: event.target.value });
 		},
 
-		handleClick: function handleClick() {
+		handleClick: function handleClick(e) {
+			e.preventDefault();
 			// console.log(this.state.queryTerm);
 			// console.log(this.state.numResults);
 			// console.log(this.state.startYear);
 			// console.log(this.state.endYear);
 
-			// Updates the parent element (works)
+			// Updates the parent element
 			this.props.setParameters(this.state.queryTerm, this.state.numResults, this.state.startYear, this.state.endYear);
 		},
 
@@ -31276,7 +31446,12 @@
 								),
 								React.createElement(
 									"select",
-									{ className: "form-control", id: "numRecordsSelect", onChange: this.handleNumChange },
+									{ className: "form-control", id: "numRecordsSelect", require: "true", onChange: this.handleNumChange },
+									React.createElement(
+										"option",
+										{ value: "0" },
+										"-"
+									),
 									React.createElement(
 										"option",
 										{ value: "1" },
@@ -31336,7 +31511,7 @@
 	module.exports = Search;
 
 /***/ },
-/* 181 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31377,7 +31552,7 @@
 	module.exports = Results;
 
 /***/ },
-/* 182 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31417,7 +31592,7 @@
 	module.exports = Saved;
 
 /***/ },
-/* 183 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31426,13 +31601,14 @@
 
 	var helpers = {
 
-		runSearch: function runSearch(term) {
+		runSearch: function runSearch(term, num) {
 			console.log(term);
+			console.log(num);
 
 			var URL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7d3df12c9cc24361aad9ac44f690a69b&q=" + term;
 			return axios.get(URL).then(function (response) {
 				console.log(response);
-				return response;
+				// return response;
 			});
 		}
 	};

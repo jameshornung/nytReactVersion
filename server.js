@@ -20,7 +20,7 @@ app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
 app.use(express.static('./public'));
 //=======================================
-
+var request = require('request');
 
 // MongoDB Configuration ================
 mongoose.connect('mongodb://localhost/nytreact');
